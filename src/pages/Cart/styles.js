@@ -21,7 +21,7 @@ export const Container = styled.main`
   }
 `;
 
-export const Voltar = styled(IconButton).attrs({
+export const goBack = styled(IconButton).attrs({
   children: <ArrowBackIcon />
 })`
   left: 20px;
@@ -46,6 +46,6 @@ export const TotalContainer = styled.section`
   }
 `
 
-export const PagamentoContainer = styled(FormControl)`
+export const PaymentContainer = styled(FormControl)`
   width: 100%;
 `

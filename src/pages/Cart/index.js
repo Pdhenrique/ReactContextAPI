@@ -1,30 +1,30 @@
 import { Button, Snackbar, InputLabel } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useState } from 'react';
-import { Container, Voltar, TotalContainer, PagamentoContainer} from './styles';
+import { Container, goBack, TotalContainer, PaymentContainer} from './styles';
 
-function Carrinho() {
+function Cart() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   return (
     <Container>
-      <Voltar />
+      <goBack />
       <h2>
-        Carrinho
+        Cart
       </h2>
-      <PagamentoContainer>
-        <InputLabel> Forma de Pagamento </InputLabel>
-      </PagamentoContainer>
+      <PaymentContainer>
+        <InputLabel> Payment method </InputLabel>
+      </PaymentContainer>
       <TotalContainer>
           <div>
-            <h2>Total no Carrinho: </h2>
+            <h2>Total in Cart: </h2>
             <span>R$ </span>
           </div>
           <div>
-            <h2> Saldo: </h2>
+            <h2> Balance: </h2>
             <span> R$ </span>
           </div>
           <div>
-            <h2> Saldo Total: </h2>
+            <h2> Total balance: </h2>
             <span> R$ </span>
           </div>
         </TotalContainer>
@@ -51,11 +51,11 @@ function Carrinho() {
             onClose={() => setOpenSnackbar(false)}
             severity="success"
           >
-            Compra feita com sucesso!
+            Purchase made successfully!
           </MuiAlert>
         </Snackbar>
     </Container>
   )
 }
 
-export default Carrinho;
+export default Cart;

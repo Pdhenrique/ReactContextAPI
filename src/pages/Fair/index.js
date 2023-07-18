@@ -1,37 +1,37 @@
 import {
   Container,
   Header,
-  Lista,
+  List,
 } from './styles';
-import feira from './feira.json';
+import fair from './fair.json';
 import Produto from 'components/Produto';
 import NavBar from './NavBar';
 
 
-function Feira() {
+function Fair() {
   return (
     <Container>
       <NavBar />
       <Header>
         <div>
-          <h2> Olá!</h2>
-          <h3> Saldo: R$</h3>
+          <h2> Hello!</h2>
+          <h3> Balance: R$</h3>
         </div>
-        <p>Encontre os melhores produtos orgânicos!</p>
+        <p>Find the best organic products!</p>
       </Header>
-      <Lista>
+      <List>
         <h2>
-          Produtos:
+        Products:
         </h2>
-        {feira.map(produto => (
+        {fair.map(produto => (
           <Produto
             {...produto}
             key={produto.id}
           />
         ))}
-      </Lista>
+      </List>
     </Container>
   )
 }
 
-export default Feira;
+export default Fair;
