@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Button, Snackbar, InputLabel, Select, MenuItem } from '@material-ui/core';
@@ -6,6 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import { Container, GoBack, TotalContainer, PaymentContainer} from './styles';
 
+import { UserContext } from 'common/context/User';
 import { useCartContext } from 'common/context/Cart';
 import { PaymentContext, usePaymentContext } from 'common/context/payMethod';
 
@@ -14,9 +15,11 @@ import Product from 'components/Product';
 
 function Cart() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const { cart } = useCartContext()
+  const { cart, totalValue } = useCartContext()
+  const { balance = 0 } = useContext(UserContext)
   const { payMethods, paymentMethod, changePayMethod} = usePaymentContext(PaymentContext)
   const history = useHistory()
+  const total = useMemo(() => balance - totalValue, [balance, totalValue])
 
   return (
     <Container>
@@ -46,16 +49,16 @@ function Cart() {
       </PaymentContainer>
       <TotalContainer>
           <div>
-            <h2>Total in Cart: </h2>
-            <span>R$ </span>
+            <h2>Total in Cart:</h2>
+            <span>R$ {totalValue.toFixed(2)} </span>
           </div>
           <div>
             <h2> Balance: </h2>
-            <span> R$ </span>
+            <span> R$ {Number(balance).toFixed(2)} </span>
           </div>
           <div>
             <h2> Total balance: </h2>
-            <span> R$ </span>
+            <span> R$ {total.toFixed(2)} </span>
           </div>
         </TotalContainer>
       <Button
@@ -64,6 +67,7 @@ function Cart() {
         }}
         color="primary"
         variant="contained"
+        disabled={total < 0}
       >
          Comprar
        </Button>
