@@ -4,6 +4,7 @@ import Login from 'pages/Login'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { UserProvider } from 'common/context/User'
 import { CartProvider } from 'common/context/Cart'
+import { PaymentProvider } from 'common/context/payMethod'
 
 function Router() {
 
@@ -18,9 +19,11 @@ function Router() {
                         <Route path="/Fair">
                             <Fair />
                         </Route>
-                        <Route path="/Cart">
-                            <Cart />
-                        </Route>
+                       <PaymentProvider>
+                            <Route path="/Cart">
+                                <Cart />
+                            </Route>
+                       </PaymentProvider>
                     </CartProvider>
                 </UserProvider>
             </Switch>
