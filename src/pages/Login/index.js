@@ -7,41 +7,54 @@ import {
 import {
   Input,
   InputLabel,
-  InputAdornment 
+  InputAdornment
 } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom'
+import { UserContext } from 'common/context/User'
+import { useContext } from 'react';
+
 function Login() {
+
+  const history = useHistory()
+  const { name, setName, balance, setBalance } = useContext(UserContext)
   return (
     <Container>
       <Titulo>
-        Insira o seu nome
+      Enter your name
       </Titulo>
       <InputContainer>
         <InputLabel>
-          Nome
+          Name
         </InputLabel>
         <Input
+          value={name}
+          onChange={(event) => setName(event.target.value)}
           type="text"
         />
       </InputContainer>
       <InputContainer>
         <InputLabel>
-          Saldo
+          Balance
         </InputLabel>
         <Input
-        type="number"
-        startAdornment={
-          <InputAdornment position="start">
-            R$
-          </InputAdornment>
-        }
-      />
+          value={balance}
+          onChange={(event) => setBalance(event.target.value)}
+          type="number"
+          startAdornment={
+            <InputAdornment position="start">
+              R$
+            </InputAdornment>
+          }
+        />
       </InputContainer>
       <Button
+        onClick={() => history.push('/fair')}
+        disabled={name.length < 4}
         variant="contained"
         color="primary"
       >
-        Avançar
+        Go forward
       </Button>
     </Container>
   )

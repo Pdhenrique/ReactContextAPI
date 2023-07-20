@@ -6,29 +6,31 @@ import {
 import fair from './fair.json';
 import Produto from 'components/Produto';
 import NavBar from './NavBar';
+import {  useContext } from 'react';
+import { UserContext } from 'common/context/User';
 
 
 function Fair() {
+
+  const { name, balance } = useContext(UserContext)
+
+
+
   return (
     <Container>
       <NavBar />
       <Header>
         <div>
-          <h2> Hello!</h2>
-          <h3> Balance: R$</h3>
+          <h2> Hello {name}!</h2>
+          <h3> Balance: R${balance} </h3>
         </div>
         <p>Find the best organic products!</p>
       </Header>
       <List>
         <h2>
-        Products:
+          Products:
         </h2>
-        {fair.map(produto => (
-          <Produto
-            {...produto}
-            key={produto.id}
-          />
-        ))}
+        {fair.map(produto => (<Produto {...produto} key={produto.id} />))}
       </List>
     </Container>
   )
