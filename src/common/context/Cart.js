@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { usePaymentContext } from './payMethod'
+import { userContext } from './User'
 
 
 export const CartContext = createContext()
@@ -37,6 +39,9 @@ export const useCartContext = () => {
         setTotalValue
     } = useContext(CartContext)
 
+    const { paymentMethod } =  usePaymentContext()
+    const { setBalance } = useContext(userContext)
+
     function changeQuantity(id, quantity) {
         return cart.map(cartItem => {
             if (cartItem.id === id) cartItem.quantity += quantity
@@ -63,6 +68,11 @@ export const useCartContext = () => {
         setCart(changeQuantity(id, -1))
     }
 
+    function makePurchase() {
+        setCart([])
+        setBalance((atualBalance) => atualBalance - totalValue )
+    }
+
     useEffect(() => {
         const { newQuantity, newTotal } = cart.reduce((counter, item) => ({
             newQuantity: counter.newQuantity + item.quantity,
@@ -70,10 +80,17 @@ export const useCartContext = () => {
 
         }), { newQuantity: 0, newTotal: 0 })
         setQuantityItems(newQuantity)
-        setTotalValue(newTotal)
-    }, [cart, setQuantityItems, setTotalValue])
+        setTotalValue(newTotal * paymentMethod.fees)
+    }, [cart, setQuantityItems, setTotalValue, paymentMethod])
 
     return {
-        cart, setCart, addItem, removeItem, quantityItems, setQuantityItems, totalValue
+        cart, 
+        setCart, 
+        addItem, 
+        removeItem, 
+        quantityItems, 
+        setQuantityItems, 
+        totalValue, 
+        makePurchase
     }
 }

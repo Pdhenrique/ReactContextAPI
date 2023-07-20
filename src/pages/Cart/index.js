@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import { Container, GoBack, TotalContainer, PaymentContainer} from './styles';
 
-import { UserContext } from 'common/context/User';
+import { userContext } from 'common/context/User';
 import { useCartContext } from 'common/context/Cart';
 import { PaymentContext, usePaymentContext } from 'common/context/payMethod';
 
@@ -15,8 +15,8 @@ import Product from 'components/Product';
 
 function Cart() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const { cart, totalValue } = useCartContext()
-  const { balance = 0 } = useContext(UserContext)
+  const { cart, totalValue, makePurchase } = useCartContext()
+  const { balance = 0 } = useContext(userContext)
   const { payMethods, paymentMethod, changePayMethod} = usePaymentContext(PaymentContext)
   const history = useHistory()
   const total = useMemo(() => balance - totalValue, [balance, totalValue])
@@ -63,11 +63,12 @@ function Cart() {
         </TotalContainer>
       <Button
         onClick={() => {
+          makePurchase()
           setOpenSnackbar(true);
         }}
         color="primary"
         variant="contained"
-        disabled={total < 0}
+        disabled={total < 0 || cart.length === 0}
       >
          Comprar
        </Button>
