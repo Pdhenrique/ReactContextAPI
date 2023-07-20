@@ -4,7 +4,7 @@ import {
   List,
 } from './styles';
 import fair from './fair.json';
-import Produto from 'components/Produto';
+import Produto from 'components/Product';
 import NavBar from './NavBar';
 import {  useContext } from 'react';
 import { UserContext } from 'common/context/User';

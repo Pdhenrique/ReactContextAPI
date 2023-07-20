@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { useCartContext } from 'common/context/Cart'
 
-function Produto({
+function Product({
   name,
   photo,
   id,
@@ -42,4 +42,4 @@ function Produto({
   )
 }
 
-export default memo(Produto)
+export default memo(Product)
