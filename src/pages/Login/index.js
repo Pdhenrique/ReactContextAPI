@@ -11,13 +11,13 @@ import {
 } from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom'
-import { UserContext } from 'common/context/User'
+import { userContext } from 'common/context/User'
 import { useContext } from 'react';
 
 function Login() {
 
   const history = useHistory()
-  const { name, setName, balance, setBalance } = useContext(UserContext)
+  const { name, setName, balance, setBalance } = useContext(userContext)
   return (
     <Container>
       <Titulo>

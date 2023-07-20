@@ -7,12 +7,12 @@ import fair from './fair.json';
 import Produto from 'components/Product';
 import NavBar from './NavBar';
 import {  useContext } from 'react';
-import { UserContext } from 'common/context/User';
+import { userContext } from 'common/context/User';
 
 
 function Fair() {
 
-  const { name, balance } = useContext(UserContext)
+  const { name, balance } = useContext(userContext)
 
 
 

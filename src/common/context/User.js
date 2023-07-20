@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react'
 
-export const UserContext = createContext()
+export const userContext = createContext()
 
-UserContext.displayName = "User"
+userContext.displayName = "User"
 
 export const UserProvider = ({children}) => {
     
@@ -10,9 +10,9 @@ export const UserProvider = ({children}) => {
     const [ balance, setBalance ] = useState(0)
 
     return(
-        <UserContext.Provider value={{ name, setName, balance, setBalance}}>
+        <userContext.Provider value={{ name, setName, balance, setBalance}}>
             {children}
-        </UserContext.Provider>
+        </userContext.Provider>
 
     )
 }
