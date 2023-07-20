@@ -1,16 +1,29 @@
 import { Button, Snackbar, InputLabel } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useState } from 'react';
-import { Container, goBack, TotalContainer, PaymentContainer} from './styles';
+import { Container, GoBack, TotalContainer, PaymentContainer} from './styles';
+import { useCartContext } from 'common/context/Cart';
+import Product from 'components/Product';
+import { useHistory } from 'react-router-dom';
 
 function Cart() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const { cart } = useCartContext()
+
+  const history = useHistory()
+
   return (
     <Container>
-      <goBack />
+      <GoBack onClick={() => history.goBack()} />
       <h2>
         Cart
       </h2>
+      {cart.map(item => (
+        <Product
+          {...item}
+          key={item.id}
+        />
+      ))}
       <PaymentContainer>
         <InputLabel> Payment method </InputLabel>
       </PaymentContainer>

@@ -21,7 +21,7 @@ export const Container = styled.main`
   }
 `;
 
-export const goBack = styled(IconButton).attrs({
+export const GoBack = styled(IconButton).attrs({
   children: <ArrowBackIcon />
 })`
   left: 20px;
